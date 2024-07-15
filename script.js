@@ -3,39 +3,46 @@ $(document).ready(function() {
     var imagesData = [];
     var quotesData = [];
 
-    navigator.clipboard.writeText("The only true wisdom is in knowing you know nothing. - Socrates");
+    // Disable the new quote button initially
+    $("#newquote").prop("disabled", true);
 
-    quotesearch();
-    imagesearch();
+    // Fetch data and enable button when ready
+    $.when(quotesearch(), imagesearch()).done(function() {
+        $("#newquote").prop("disabled", false);
+    });
 
     $("#newquote").click(function(event) {
         event.preventDefault();
-        const quoterandomizer = Math.floor(Math.random() * quotesData.length);
-        const backgroundrandomizer = Math.floor(Math.random() * imagesData.length);
+        if (quotesData.length > 0 && imagesData.length > 0) {
+            const quoterandomizer = Math.floor(Math.random() * quotesData.length);
+            const backgroundrandomizer = Math.floor(Math.random() * imagesData.length);
 
-        $('.textbox').animate({ opacity: 0 }, 500, function() {
-            $(this).animate({ opacity: 1 }, 500);
-            $('#text').html(quotesData[quoterandomizer].quote);
-        });
+            $('.textbox').animate({ opacity: 0 }, 500, function() {
+                $(this).animate({ opacity: 1 }, 500);
+                $('#text').html(quotesData[quoterandomizer].quote);
+            });
 
-        $('.author').animate({ opacity: 0 }, 500, function() {
-            $(this).animate({ opacity: 1 }, 500);
-            $('#author').html("- " + quotesData[quoterandomizer].source);
-        });
+            $('.author').animate({ opacity: 0 }, 500, function() {
+                $(this).animate({ opacity: 1 }, 500);
+                $('#author').html("- " + quotesData[quoterandomizer].source);
+            });
 
-        $('#tweet-quote').attr(
-            'href',
-            'https://twitter.com/intent/tweet?hashtags=quotes&text=' +
-            encodeURIComponent('"' + quotesData[quoterandomizer].quote + '" ' + quotesData[quoterandomizer].source)
-        );
+            $('#tweet-quote').attr(
+                'href',
+                'https://twitter.com/intent/tweet?hashtags=quotes&text=' +
+                encodeURIComponent('"' + quotesData[quoterandomizer].quote + '" ' + quotesData[quoterandomizer].source)
+            );
 
-        $("#copy-quote").off("click").on("click", function(event) {
-            event.preventDefault();
-            navigator.clipboard.writeText(quotesData[quoterandomizer].quote + " - " + quotesData[quoterandomizer].source);
-        });
+            $("#copy-quote").off("click").on("click", function(event) {
+                event.preventDefault();
+                navigator.clipboard.writeText(quotesData[quoterandomizer].quote + " - " + quotesData[quoterandomizer].source);
+            });
 
-        $("body").css("background-image", "url(" + imagesData[backgroundrandomizer].src.original + ")");
-        $(":root").get(0).style.setProperty("--coloruse", imagesData[backgroundrandomizer].avg_color);
+            $("body").css("background-image", "url(" + imagesData[backgroundrandomizer].src.original + ")");
+            $(":root").get(0).style.setProperty("--coloruse", imagesData[backgroundrandomizer].avg_color);
+        } else {
+            console.error("Data not loaded properly.");
+        }
     });
 
     function imagesearch() {
@@ -44,7 +51,7 @@ $(document).ready(function() {
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", apikey);
             },
-            url: "https://api.pexels.com/v1/search?query=nature&per_page=50",
+            url: "https://api.pexels.com/v1/search?query=nature&per_page=80",
             success: function(data) {
                 imagesData = data.photos;
             },
