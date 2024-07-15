@@ -44,7 +44,7 @@ $(document).ready(function() {
             beforeSend: function(xhr) {
                 xhr.setRequestHeader("Authorization", apikey);
             },
-            url: "https://api.pexels.com/v1/search?query=nature&per_page=100",
+            url: "https://api.pexels.com/v1/search?query=nature&per_page=50",
             success: function(data) {
                 imagesData = data.photos;
             },
