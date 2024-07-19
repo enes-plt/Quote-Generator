@@ -1,8 +1,10 @@
 :root {
-    --coloruse: #808080
-  }
+    /* Custom property for the theme color */
+    --coloruse: #808080;
+}
 
-body{
+body {
+    /* Background image and styling */
     background-image: url("https://blog.depositphotos.com/wp-content/uploads/2017/07/Soothing-nature-backgrounds-2.jpg.webp");
     display: flex;
     background-size: cover;
@@ -11,14 +13,15 @@ body{
     font-family: 'Raleway', sans-serif;
     height: 100vh;
     object-fit: contain;
-    transition: background-image 3s;
+    transition: background-image 3s; /* Smooth transition for background image change */
 }
 
-div{
+div {
     position: relative;
 }
 
-#quotebox{
+#quotebox {
+    /* Styling for the main quote box */
     background-color: white;
     display: table;
     padding: 25px;
@@ -26,35 +29,39 @@ div{
     position: relative;
 }
 
-#quotebox .textbox{
+#quotebox .textbox {
+    /* Styling for the text container */
     align-items: center;
     text-align: center;
     justify-content: center;
     font-size: 25px;
-    color: var(--coloruse);
+    color: var(--coloruse); /* Use custom property for color */
     height: auto;
     width: 450px;
 }
 
-#quotebox .author{
+#quotebox .author {
+    /* Styling for the author container */
     align-items: right;
     text-align: right;
     justify-content: right;
-    color: var(--coloruse);
+    color: var(--coloruse); /* Use custom property for color */
 }
 
-#quotebox .buttons{
+#quotebox .buttons {
+    /* Container for the buttons */
     width: 450px;
     margin: auto;
     display: block;
 }
 
-#quotebox .buttons .button{
+#quotebox .buttons .button {
+    /* General styling for buttons */
     height: 38px;
     border: none;
     border-radius: 3px;
-    color: #fff;
-    background-color: var(--coloruse);
+    color: #fff; /* Text color */
+    background-color: var(--coloruse); /* Use custom property for background color */
     outline: none;
     font-size: 0.85em;
     padding: 8px 18px 6px 18px;
@@ -63,31 +70,27 @@ div{
     cursor: pointer;
 }
 
-
 #quotebox .buttons .button#tweet-quote,
 #quotebox .buttons .button#copy-quote {
-  float: left;
-  padding: 0px;
-  padding-top: 8px;
-  text-align: center;
-  font-size: 1.2em;
-  margin-right: 5px;
-  height: 30px;
-  width: 40px;
+    /* Specific styling for tweet and copy buttons */
+    float: left;
+    padding: 0px;
+    padding-top: 8px;
+    text-align: center;
+    font-size: 1.2em;
+    margin-right: 5px;
+    height: 30px;
+    width: 40px;
 }
 
 #quotebox .buttons .button#newquote {
+    /* Specific styling for new quote button */
     float: right;
 }
 
-.button#newquote:hover{
-    opacity: 0.7;
-}
-
-.button#tweet-quote:hover{
-    opacity: 0.7;
-}
-
-.button#copy-quote:hover{
+.button#newquote:hover,
+.button#tweet-quote:hover,
+.button#copy-quote:hover {
+    /* Hover effect for buttons */
     opacity: 0.7;
 }
